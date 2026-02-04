@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Media Demo - OpenCV.js</title>
-
-    <!-- OpenCV.js -->
-    <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
+    <script src="https://docs.opencv.org/4.x/opencv.js"></script>
 
     <style>
         body {
@@ -25,7 +23,7 @@
 
 <body>
 
-<h2>Ảnh (OpenCV.js)</h2>
+<h2>Ảnh</h2>
 <canvas id="canvas"></canvas><br>
 <button onclick="rotateImage(0)">Gốc</button>
 <button onclick="rotateImage(90)">Xoay 90°</button>
@@ -33,16 +31,17 @@
 
 <hr>
 
-<h2>Video (HTML5)</h2>
+<h2>Video</h2>
 <video width="480" controls>
-    <source src="RAW_VIDEO_URL" type="video/mp4">
+  <source src="https://raw.githubusercontent.com/TanQuoc-73/Daphuongtien_VidImg/main/vid/vid1.mp4"
+          type="video/mp4">
 </video>
+
 
 <script>
 let src = null;
 
-// ⚠️ thay link này bằng RAW IMAGE URL trên GitHub
-const IMAGE_URL = "RAW_IMAGE_URL";
+const IMAGE_URL ="https://raw.githubusercontent.com/TanQuoc-73/Daphuongtien_VidImg/main/img/img1.png";
 
 cv['onRuntimeInitialized'] = () => {
     loadImage();
