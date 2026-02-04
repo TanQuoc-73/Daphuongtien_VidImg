@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Demo - OpenCV.js</title>
+
+    <!-- OpenCV.js -->
+    <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        canvas {
+            border: 1px solid #333;
+            margin-bottom: 10px;
+        }
+        button {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Ảnh (OpenCV.js)</h2>
+<canvas id="canvas"></canvas><br>
+<button onclick="rotateImage(0)">Gốc</button>
+<button onclick="rotateImage(90)">Xoay 90°</button>
+<button onclick="rotateImage(180)">Xoay 180°</button>
+
+<hr>
+
+<h2>Video (HTML5)</h2>
+<video width="480" controls>
+    <source src="RAW_VIDEO_URL" type="video/mp4">
+</video>
+
+<script>
+let src = null;
+
+// ⚠️ thay link này bằng RAW IMAGE URL trên GitHub
+const IMAGE_URL = "RAW_IMAGE_URL";
+
+cv['onRuntimeInitialized'] = () => {
+    loadImage();
+};
+
+function loadImage() {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = IMAGE_URL;
+
+    img.onload = () => {
+        src = cv.imread(img);
+        cv.imshow("canvas", src);
+    };
+}
+
+function rotateImage(deg) {
+    if (!src) return;
+
+    let dst = new cv.Mat();
+
+    if (deg === 90) {
+        cv.rotate(src, dst, cv.ROTATE_90_CLOCKWISE);
+    } else if (deg === 180) {
+        cv.rotate(src, dst, cv.ROTATE_180);
+    } else {
+        dst = src.clone();
+    }
+
+    cv.imshow("canvas", dst);
+}
+</script>
+
+</body>
+</html>
+
